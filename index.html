@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, My Love ♡</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(145deg,#fff8f1,#ffe0eb,#fbd0e2);font-family:Nunito,sans-serif;color:#a85c79;overflow-x:hidden}
+button{font:inherit;cursor:pointer;border:0}
+.wrap{width:min(92%,520px);margin:auto;padding:25px 0 40px;position:relative;z-index:1}
+.screen{display:none;min-height:90vh;align-items:center;justify-content:center;animation:fade .5s}
+.screen.active{display:flex}
+@keyframes fade{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.card{width:100%;background:#ffffffdf;border:2px solid white;border-radius:28px;padding:25px 20px;text-align:center;box-shadow:0 15px 40px #c86f9125}
+h1{font:clamp(30px,8vw,43px) Pacifico;color:#df6f99;margin:12px 0}
+h2{font:25px Pacifico;color:#df6f99;margin:12px 0}
+p{font-size:14px;line-height:1.85}
+.small{font-size:12px;color:#b77b92}
+.tag{font-size:11px;letter-spacing:2px;font-weight:900;color:#ce83a0}
+.art{font-size:75px;margin:15px 0}
+.btn{padding:12px 20px;margin:7px 3px;border-radius:30px;background:linear-gradient(135deg,#f7a8c1,#df6f99);color:white;font-size:13px;font-weight:900;box-shadow:0 4px 0 #c95d86}
+.btn.light{background:#fff0f5;color:#c65f87;box-shadow:0 4px 0 #f2c5d5}
+.choice{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.book-area{perspective:1000px;margin:22px auto;width:min(100%,330px)}
+.book-cover{min-height:390px;border-radius:9px 20px 20px 9px;background:linear-gradient(130deg,#d96f98,#f3a9c2 55%,#d97b9e);box-shadow:8px 10px 0 #c87594, inset 7px 0 10px #9e456d55;padding:20px;display:flex;align-items:center;justify-content:center;transition:transform 1s;transform-origin:left;cursor:pointer;position:relative;color:white}
+.book-cover:before{content:"";position:absolute;left:13px;top:0;bottom:0;width:3px;background:#ffffff55}
+.cover-inside{border:2px solid #ffffff9c;border-radius:12px;width:100%;height:100%;min-height:345px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.book-cover h2{color:white;font-size:31px}
+.book-cover p{color:white}
+.book-cover.open{transform:rotateY(-105deg);opacity:0;pointer-events:none}
+.book-inside{display:none;background:#fffdf8;border-radius:8px 18px 18px 8px;min-height:390px;padding:24px 22px;box-shadow:5px 8px 0 #e8b3c6;text-align:left;position:relative;border-left:8px solid #f3d2dd}
+.book-inside.show{display:flex;flex-direction:column;justify-content:space-between;animation:fade .7s}
+.book-inside h2{text-align:center}
+.book-inside p{font-size:14px;white-space:pre-line}
+.book-number{text-align:center;font-size:11px;color:#c58ba0}
+.book-buttons{display:flex;justify-content:space-between;align-items:center;gap:5px}
+.book-buttons .btn{padding:10px 13px}
+.flower-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.flower{background:#fff1f6;border:1px solid #f8d4e1;border-radius:18px;padding:12px 5px;font-size:38px;min-height:80px}
+.flower.done{background:#fce2eb}
+.note{background:#fff3f7;border:1px dashed #eaa4bc;padding:15px;border-radius:17px;margin-top:13px;min-height:60px}
+.cake{font-size:95px;display:inline-block;animation:bob 2s infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.gift{font-size:90px;display:inline-block;animation:bob 2s infinite;cursor:pointer}
+.popup-bg{position:fixed;inset:0;background:#75465b99;z-index:10;display:none;align-items:center;justify-content:center;padding:20px}
+.popup-bg.show{display:flex}
+.popup{width:min(100%,350px);background:#fffaf8;border-radius:25px;padding:25px;text-align:center;border:3px solid white}
+.letter{background:#fffdf9;text-align:left;padding:20px;border-radius:16px;border:1px dashed #e8a3bb;min-height:180px}
+.letter p{white-space:pre-line}
+.progress{height:7px;background:#f8dce6;border-radius:20px;margin:15px 0;overflow:hidden}
+.progress span{display:block;height:100%;background:#e77fa3;width:0}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}
+.float{position:absolute;top:-30px;animation:fall 4s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.footer{text-align:center;font-size:11px;color:#c38aa0;padding:15px}
+</style>
+</head>
+<body>
+<div id="confetti"></div>
+<div class="wrap">
+
+<!-- PEMBUKA -->
+<section class="screen active" id="s1">
+<div class="card">
+<div class="tag">A LITTLE SURPRISE FOR YOU</div>
+<div class="art">🎀🧸🎀</div>
+<h1>Hi, birthday girl!</h1>
+<p>Someone prepared a little surprise just for you.</p>
+<p>Are you ready to start your birthday adventure?</p>
+<div class="choice">
+<button class="btn" onclick="go(2)">YES, LET'S GO! ♡</button>
+<button class="btn light" onclick="document.getElementById('notyet').textContent='Hehe, take your time. I will wait! 💗'">Not yet 🙈</button>
+</div>
+<p class="small" id="notyet"></p>
+</div>
+</section>
+
+<!-- PESAN PEMBUKA -->
+<section class="screen" id="s2">
+<div class="card">
+<div class="art">💌</div>
+<h1>Before we begin...</h1>
+<p>Today's not just an ordinary day.</p>
+<p>It's the day my favorite person was born. I prepared something special for you. Take your time and enjoy every little surprise, okay?</p>
+<button class="btn" onclick="go(3)">Continue, sayang ♡</button>
+</div>
+</section>
+
+<!-- BUKU TERTUTUP DAN TERBUKA -->
+<section class="screen" id="s3">
+<div class="card">
+<div class="tag">CHAPTER 01 · A LITTLE BOOK</div>
+<h2>A book for my favorite girl</h2>
+<p>There's something I want you to read. Tap the book to open it!</p>
+
+<div class="book-area">
+<div class="book-cover" id="cover" onclick="openBook()">
+<div class="cover-inside">
+<div style="font-size:65px">🌷</div>
+<h2>For My Favorite Girl</h2>
+<p>A little book made with love ♡</p>
+<div style="font-size:35px">🎀</div>
+<p>Tap to open</p>
+</div>
+</div>
+
+<div class="book-inside" id="inside">
+<div>
+<div class="book-number" id="bookCount">PAGE 1 / 5</div>
+<h2 id="bookTitle">A little reminder ♡</h2>
+<div style="text-align:center;font-size:45px" id="bookArt">🌷</div>
+<p id="bookText"></p>
+</div>
+<div class="book-buttons">
+<button class="btn light" onclick="bookPrev()">← Back</button>
+<button class="btn" id="bookNext" onclick="bookNext()">Next →</button>
+</div>
+</div>
+</div>
+<p class="small" id="bookHint">You can turn the pages one by one ♡</p>
+<button class="btn light" id="bookContinue" style="display:none" onclick="go(4)">Continue to flowers 🌸</button>
+</div>
+</section>
+
+<!-- BUNGA RAHASIA -->
+<section class="screen" id="s4">
+<div class="card">
+<div class="tag">CHAPTER 02 · SECRET GARDEN</div>
+<h2>A flower garden for you</h2>
+<p>There are six flowers here. Tap each one to find a hidden message!</p>
+<div class="flower-grid" id="flowers">
+<button class="flower" onclick="pickFlower(0)">🌷</button>
+<button class="flower" onclick="pickFlower(1)">🌸</button>
+<button class="flower" onclick="pickFlower(2)">🌼</button>
+<button class="flower" onclick="pickFlower(3)">🌺</button>
+<button class="flower" onclick="pickFlower(4)">🌻</button>
+<button class="flower" onclick="pickFlower(5)">🪻</button>
+</div>
+<div class="note" id="flowerNote">Choose a flower to reveal its secret ♡</div>
+<p class="small" id="flowerCount">0 / 6 flowers found</p>
+<button class="btn" id="flowerNext" style="display:none" onclick="go(5)">All flowers found! →</button>
+</div>
+</section>
+
+<!-- TIUP LILIN -->
+<section class="screen" id="s5">
+<div class="card">
+<div class="tag">CHAPTER 03 · MAKE A WISH</div>
+<h2>A cake, just for you!</h2>
+<div class="cake" id="cake">🎂</div>
+<p id="cakeText">Close your eyes, make a wish, then tap the button!</p>
+<button class="btn" id="blowBtn" onclick="blowCandles()">Blow the candles! 🕯️</button>
+<p id="cakeResult" class="small"></p>
+<button class="btn" id="cakeNext" style="display:none" onclick="go(6)">Wish made! Continue ♡</button>
+</div>
+</section>
+
+<!-- TANYA KADO -->
+<section class="screen" id="s6">
+<div class="card">
+<div class="tag">CHAPTER 04 · A LITTLE QUESTION</div>
+<div class="art">🎁</div>
+<h1>Do you want a present?</h1>
+<p>I have a little gift waiting for you. It may not be something you can hold, but I made it especially for you.</p>
+<div class="choice">
+<button class="btn" onclick="showGift()">YES, I WANT IT! 🎀</button>
+<button class="btn light" onclick="document.getElementById('shy').textContent='Hehe, no rush. Your gift will wait for you! 💗'">Maybe later 🙈</button>
+</div>
+<p class="small" id="shy"></p>
+</div>
+</section>
+
+<!-- BUKA KADO -->
+<section class="screen" id="s7">
+<div class="card">
+<div class="tag">CHAPTER 05 · YOUR PRESENT</div>
+<h2>Tap the gift to unwrap it!</h2>
+<div class="gift" onclick="unwrap()">🎁</div>
+<p id="unwrapText">I wonder what's inside...</p>
+<div class="note" id="giftInside" style="display:none">
+Surprise! 💗<br><br>
+Your gift is this little reminder: you are loved, appreciated, and worth celebrating. I hope this makes you smile, even just a little.
+</div>
+<button class="btn" id="giftContinue" style="display:none" onclick="go(8)">There's a letter for you →</button>
+</div>
+</section>
+
+<!-- SURAT -->
+<section class="screen" id="s8">
+<div class="card">
+<div class="tag">CHAPTER 06 · FROM MY HEART</div>
+<h2>A letter for my favorite girl</h2>
+<p>One last book. This time, it's a letter from me to you.</p>
+<div class="progress"><span id="letterProgress"></span></div>
+<div class="letter">
+<p id="letterText"></p>
+</div>
+<p class="small" id="letterCount">Page 1 / 6</p>
+<button class="btn" id="letterNext" onclick="nextLetter()">Turn the page →</button>
+</div>
+</section>
+
+<!-- AKHIR -->
+<section class="screen" id="s9">
+<div class="card">
+<div class="art">💗🌷🧸</div>
+<h1>Happy Birthday!</h1>
+<p>I hope this little birthday journey made you feel special, because you really are.</p>
+<p>Thank you for being here. Thank you for being you.</p>
+<h2>Happy birthday, my love!</h2>
+<p>Stay happy, stay healthy, and always be my favorite girl. Love youuu. ❤️</p>
+<button class="btn" onclick="celebrate()">Celebrate again! 🎉</button>
+<button class="btn light" onclick="go(1)">Start again ↻</button>
+</div>
+</section>
+
+<div class="footer">made with love, just for you ♡ 🎀</div>
+</div>
+
+<div class="popup-bg" id="giftPopup">
+<div class="popup">
+<div class="art">🎀</div>
+<h2>Are you sure?</h2>
+<p>Your present is waiting for you!</p>
+<button class="btn" onclick="confirmGift()">YES, OPEN IT! 💗</button>
+<button class="btn light" onclick="closePopup()">Wait, I'm shy 🙈</button>
+</div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+
+function go(n){
+ document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+ $('s'+n).classList.add('active');
+ window.scrollTo({top:0,behavior:'smooth'});
+ if(n===8)renderLetter();
+ if(n===9)celebrate();
+}
+
+function confetti(n=35){
+ const box=$('confetti');
+ const icons=['💗','🎀','✨','🌸','💕','⭐'];
+ for(let i=0;i<n;i++){
+  let e=document.createElement('span');
+  e.className='float';
+  e.textContent=icons[Math.floor(Math.random()*icons.length)];
+  e.style.left=Math.random()*100+'vw';
+  e.style.fontSize=(15+Math.random()*18)+'px';
+  e.style.animationDuration=(2+Math.random()*3)+'s';
+  box.appendChild(e);
+  setTimeout(()=>e.remove(),5500);
+ }
+}
+
+/* BUKU */
+const pages=[
+ ['🌷','A little reminder ♡','Some people make life feel a little softer just by being in it. You are one of them.'],
+ ['🧸','You are special','You deserve gentle days, happy moments, and all the little things that make you smile.'],
+ ['💗','Never forget','I hope you never forget how precious you are, even on the days you do not feel your best.'],
+ ['🌼','Thank you','Thank you for every laugh, every conversation, and every little memory we share.'],
+ ['🎀','My wish for you','If I could wrap up one wish for you, it would be a whole year full of happiness.']
+];
+let bp=0,opened=false;
+
+function openBook(){
+ if(opened)return;
+ opened=true;
+ $('cover').classList.add('open');
+ setTimeout(()=>{
+  $('inside').classList.add('show');
+  renderBook();
+  $('bookHint').textContent='The first page is waiting for you ♡';
+ },650);
+ confetti(20);
+}
+
+function renderBook(){
+ $('bookArt').textContent=pages[bp][0];
+ $('bookTitle').textContent=pages[bp][1];
+ $('bookText').textContent=pages[bp][2];
+ $('bookCount').textContent='PAGE '+(bp+1)+' / '+pages.length;
+ $('bookNext').textContent=bp===pages.length-1?'Finish book ♡':'Next →';
+}
+
+function bookNext(){
+ if(bp<pages.length-1){bp++;renderBook();confetti(5)}
+ else{$('bookContinue').style.display='inline-block';$('bookHint').textContent='You finished the little book! 💗'}
+}
+function bookPrev(){
+ if(bp>0){bp--;renderBook()}
+}
+
+/* BUNGA */
+const flowerMessages=[
+'A flower for your beautiful smile. 🌷',
+'A flower for your kind heart. 🌸',
+'A flower for all your dreams. 🌼',
+'A flower for your happy days. 🌺',
+'A flower for your strength. 🌻',
+'And one more, just because I love you. 🪻'
+];
+let found=[];
+
+function pickFlower(i){
+ if(found.includes(i))return;
+ found.push(i);
+ $('flowers').children[i].classList.add('done');
+ $('flowers').children[i].textContent='💗';
+ $('flowerNote').textContent=flowerMessages[i];
+ $('flowerCount').textContent=found.length+' / 6 flowers found';
+ confetti(8);
+ if(found.length===6)$('flowerNext').style.display='inline-block';
+}
+
+/* LILIN */
+let blown=false;
+function blowCandles(){
+ if(blown)return;
+ blown=true;
+ $('cake').textContent='🍰';
+ $('cakeText').textContent='You did it! Your wish is now on its way to the stars.';
+ $('cakeResult').textContent='May your wishes find their way to you. ✨';
+ $('blowBtn').textContent='Candles blown!';
+ $('cakeNext').style.display='inline-block';
+ confetti(55);
+}
+
+/* KADO */
+function showGift(){$('giftPopup').classList.add('show')}
+function closePopup(){$('giftPopup').classList.remove('show')}
+function confirmGift(){
+ $('giftPopup').classList.remove('show');
+ go(7);
+}
+function unwrap(){
+ $('giftInside').style.display='block';
+ $('unwrapText').textContent='SURPRISE! You found your little present! 💗';
+ $('giftContinue').style.display='inline-block';
+ confetti(45);
+}
+
+/* SURAT ULANG TAHUN */
+const letterPages=[
+`happy birthday sayanggg, happy birthday to my favorite person. ❤️
+
+akhirnya hari ini hari ulang tahun kamu, orang yang paling aku sayang. semoga di umur kamu yang sekarang, kamu selalu bahagia, sehat, panjang umur, dan semua yang kamu inginkan bisa tercapai yaa. aku berharap hari-hari kamu ke depannya bakal jauh lebih baik, penuh kebahagiaan, dan selalu ada alasan buat kamu tersenyum.`,
+
+`makasih udah hadir di hidup aku, makasih udah jadi bagian dari hari-hari aku, makasih buat semua hal kecil yang kamu lakuin. aku seneng banget bisa kenal kamu dan punya kamu di hidup aku.`,
+
+`maaf ya kalau selama ini aku masih sering bikin kamu kesel, masih banyak kurangnya, atau belum bisa jadi pacar yang kamu harapin. aku bakal terus belajar buat jadi lebih baik buat kamu.`,
+
+`i hope you know how special you are to me. jangan pernah ngerasa kamu sendirian ya sayang, aku selalu berharap kamu bisa bahagia dan ngerasa dicintai. semoga hubungan kita bisa terus berjalan dengan baik, bisa saling ngerti, saling jaga, dan nggak gampang nyerah satu sama lain.`,
+
+`maaf ya sayang, aku belum bisa ngasih apa-apa buat kamu di hari spesial kamu ini. maaf belum bisa bikin hari ini jadi lebih istimewa dengan sesuatu yang bisa kamu pegang. tapi tunggu nanti yaa, aku pengen bisa ngasih sesuatu buat kamu, walaupun sederhana, semoga bisa bikin kamu seneng. jangan sedih yaa, yang penting kamu tahu kalau aku sayang banget sama kamu. i hope someday i can give you more than just words. ❤️`,
+
+`once again, happy birthday my love. i love you so much, more than words can say. semoga aku masih bisa ngerayain banyak ulang tahun kamu ke depannya. stay happy, stay healthy, and always be my favorite girl. love youuu. 💗`
+];
+
+let lp=0;
+function renderLetter(){
+ $('letterText').textContent=letterPages[lp];
+ $('letterCount').textContent='Page '+(lp+1)+' / '+letterPages.length;
+ $('letterProgress').style.width=((lp+1)/letterPages.length*100)+'%';
+ $('letterNext').textContent=lp===letterPages.length-1?'Finish my letter ♡':'Turn the page →';
+}
+function nextLetter(){
+ if(lp<letterPages.length-1){lp++;renderLetter()}
+ else{go(9)}
+}
+function celebrate(){confetti(80)}
+</script>
+</body>
+</html>
